@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Exam Taker - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+ <div class="topnav">
+  <a href="{{ url_for('login') }}">Log in</a>
+ <a href="{{ url_for('signup') }}">Sign Up</a>
+</div>
+<body>
+<h1>Student Exam Taker</h1>
+<div id="signup-screen">
+    <form>
+    <label for="email"><b>Email</b></label><br/>
+    <input type="text" id="email"/><br/>
+        <label for="password"><b>Password</b></label><br/>
+    <input type="text" id="password"/><br/>
+    <label for="password">Passwords must be at least 10 characters, include both uppercase and lowercase letters, at least one special character, and at least one number.</label><br/>
+        <label for="confirm-password"><b>Confirm Password</b></label><br/>
+    <input type="text" id="confirm-password"/><br/>
+    <input type="submit" value="Sign Up"/><br/>
+</form>
+</div>
+</body>
+</html>
