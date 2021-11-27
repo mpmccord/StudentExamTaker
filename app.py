@@ -1,8 +1,10 @@
 from flask import Flask, render_template
 import flask_login
+import os
 from login import *
 
 app = Flask(__name__)
+app.secret_key = os.urandom(81)
 login_manager = flask_login.LoginManager(app)
 users = {"mel_m29": "PASSWORD2019", "cpm_29": "PASSWORD2019"}
 
@@ -41,6 +43,7 @@ def request_loader(request):
     user = User()
     user.id = email
     return user
+
 
 if __name__ == "__main__":
     app.run(port=5678)
