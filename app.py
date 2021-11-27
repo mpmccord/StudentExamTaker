@@ -42,5 +42,5 @@ def request_loader(request):
     user.id = email
     return user
 
-
-app.run(port=5678)
+if __name__ == "__main__":
+    app.run(port=5678)
