@@ -17,7 +17,7 @@ def main_page():
     return render_template("index.html")
 
 
-"""@app.route("/login", methods=['GET', 'POST'])
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     if flask.request.method == 'GET':
         return render_template("login.html")
@@ -28,9 +28,10 @@ def login():
         flask_login.login_user(user)
         return flask.redirect(flask.url_for('protected'))
 
-    return 'Bad login'"""
+    return 'Bad login'
 
 
+"""
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if flask.request.method == 'GET':
@@ -50,6 +51,7 @@ def login():
         return flask.redirect(flask.url_for('protected'))
 
     return 'Bad login'
+"""
 
 
 @app.route("/signup", methods=['GET', 'POST'])
