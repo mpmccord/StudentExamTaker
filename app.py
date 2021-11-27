@@ -1,6 +1,10 @@
 from flask import Flask, render_template
+import flask_login
+from login import *
 
 app = Flask(__name__)
+login_manager = flask_login.LoginManager(app)
+users = {"mel_m29": "PASSWORD2019", "cpm_29": "PASSWORD2019"}
 
 
 @app.route("/")
@@ -16,5 +20,27 @@ def login():
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     return render_template("signup.html")
+
+
+@login_manager.user_loader
+def user_loader(email):
+    if email not in users:
+        return
+
+    user = User()
+    user.id = email
+    return user
+
+
+@login_manager.request_loader
+def request_loader(request):
+    email = request.form.get('email')
+    if email not in users:
+        return
+
+    user = User()
+    user.id = email
+    return user
+
 
 app.run(port=5678)
