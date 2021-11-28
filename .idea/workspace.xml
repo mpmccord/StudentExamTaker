@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e405088-5a1c-46ce-a00b-8de5572215a2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/bad-login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/user-dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -13,8 +17,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -52,7 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637182492202</updated>
       <workItem from="1637182499142" duration="8580000" />
-      <workItem from="1638053554063" duration="3012000" />
+      <workItem from="1638053554063" duration="3529000" />
     </task>
     <servers />
   </component>
