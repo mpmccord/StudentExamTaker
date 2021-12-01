@@ -1,5 +1,6 @@
 from werkzeug.security import generate_password_hash
 
+from exam_backend import my_user_accounts
 from exam_backend.my_user_accounts import User
 from exam_backend.my_user_accounts import db
 from exam_backend import create_app
