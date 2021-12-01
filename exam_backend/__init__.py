@@ -4,8 +4,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
-from .my_user_accounts import User
-from .my_user_accounts import db
+from .models import User
+from .models import db
 # init SQLAlchemy so we can use it later in our models
 app = Flask(__name__)
 
