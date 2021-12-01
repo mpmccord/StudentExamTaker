@@ -1,8 +1,8 @@
-# models.py
+# my_user_accounts.py
 
 from flask_login import UserMixin
-from . import db
-
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
