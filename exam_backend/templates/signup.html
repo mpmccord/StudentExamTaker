@@ -11,6 +11,13 @@
 </div>
 <body>
 <h1>Student Exam Taker</h1>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+    </div>
+{% endif %}
+{% endwith %}
 <div id="signup-screen">
     <form>
     <label for="email"><b>Email</b></label><br/>

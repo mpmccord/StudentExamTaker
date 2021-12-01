@@ -1,17 +1,21 @@
 from werkzeug.security import generate_password_hash
 
-from exam_backend import my_user_accounts
-from exam_backend.my_user_accounts import User
-from exam_backend.my_user_accounts import db
+from exam_backend import models
+from exam_backend.models import User
+from exam_backend.models import db
 from exam_backend import create_app
+from flask_migrate import Migrate
 
 app = create_app()
 db.init_app(app)
+migrate = Migrate(app, db)
+
+
 @app.before_first_request
 def createDatabase():
     db.create_all()
     """
-    new_user = User(email="foo.bar@example.com", password=generate_password_hash("secret", method='sha256'))
+    new_user = User(email="foo.bar@my_email.com", password=generate_password_hash("secret", method='sha256'), school = "University of South Florida", type_account = "Teacher")
 
     # add the new user to the database
     db.session.add(new_user)
@@ -19,4 +23,4 @@ def createDatabase():
     """
 
 if __name__ == '__main__':
-    app.run(port=5685)
+    app.run(port=5685, debug=True)

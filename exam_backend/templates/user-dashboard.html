@@ -1,10 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Student Exam Taker - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+ <div class="topnav">
+  <a href="{{ url_for('auth.login') }}">Log in</a>
+ <a href="{{ url_for('auth.signup') }}">Sign Up</a>
+</div>
 <body>
-
+<h1>Student Exam Taker</h1>
+<p>Welcome {{ email }}</p>
 </body>
 </html>
