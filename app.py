@@ -1,13 +1,16 @@
 import flask
-from flask import Flask, render_template
+from flask import Flask, render_template, Blueprint
+from flask_sqlalchemy import SQLAlchemy
 import flask_login
 import os
-from login import *
+from . import *
+
+"""from models import *
 
 app = Flask(__name__)
-app.secret_key = os.urandom(81)
+app.secret_key = os.urandom(256)
 login_manager = flask_login.LoginManager(app)
-
+auth = Blueprint('auth', __name__)
 # Temporary: for testing purposes only
 users = {'foo@bar.tld': {'password': 'secret'}}
 
@@ -34,7 +37,7 @@ def login():
 
 
 """
-@app.route('/login', methods=['GET', 'POST'])
+"""@app.route('/login', methods=['GET', 'POST'])
 def login():
     if flask.request.method == 'GET':
         return '''
@@ -56,7 +59,7 @@ def login():
 """
 
 
-@app.route("/signup", methods=['GET', 'POST'])
+"""@app.route("/signup", methods=['GET', 'POST'])
 def signup():
     return render_template("signup.html")
 
@@ -117,8 +120,10 @@ def protected():
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
-    return 'Unauthorized'
-
+    return 'Unauthorized'"""
+"""
 
 if __name__ == "__main__":
+    app = create_app()
     app.run(port=5678)
+"""

@@ -6,20 +6,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
  <div class="topnav">
-  <a href="{{ url_for('login') }}">Log in</a>
- <a href="{{ url_for('signup') }}">Sign Up</a>
+  <a href="{{ url_for('auth.login') }}">Log in</a>
+ <a href="{{ url_for('auth.signup') }}">Sign Up</a>
 </div>
 <body>
 <h1>Student Exam Taker</h1>
 <div id="signup-screen">
     <form>
     <label for="email"><b>Email</b></label><br/>
-    <input type="text" id="email"/><br/>
+    <input type="email" id="email" name="email"/><br/>
         <label for="password"><b>Password</b></label><br/>
-    <input type="text" id="password"/><br/>
-    <label for="password">Passwords must be at least 10 characters, include both uppercase and lowercase letters, at least one special character, and at least one number.</label><br/>
+    <input type='password' name='password' id='password' placeholder='password'/><br/>
+    <label for="password" type="password">Passwords must be at least 10 characters, include both uppercase and lowercase letters, at least one special character, and at least one number.</label><br/>
         <label for="confirm-password"><b>Confirm Password</b></label><br/>
-    <input type="text" id="confirm-password"/><br/>
+    <input type='password' name='confirm-password' id='confirm-password' placeholder='password'/><br/>
         <label><b>Type of Account</b></label><br/>
         <input type="radio" name="type-account" value = "teacher"/>Teacher<br/>
     <label for="school"><b>School</b></label><br/>
