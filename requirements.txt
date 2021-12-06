@@ -1,4 +1,4 @@
-alembic==1.7.5
+alembic
 Babel==2.9.1
 blinker==1.4
 certifi==2021.10.8
@@ -13,13 +13,18 @@ Flask-Security==3.0.0
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==1.0.0
 greenlet==1.1.2
+importlib-metadata
+importlib-resources
 itsdangerous==2.0.1
 Jinja2==3.0.3
-Mako==1.1.6
-MarkupSafe==2.0.1
+Mako
+MarkupSafe
 passlib==1.7.4
+python-dateutil
 pytz==2021.3
+six
 speaklater==1.3
-SQLAlchemy==1.4.27
+SQLAlchemy
 Werkzeug==2.0.2
 WTForms==3.0.0
+zipp

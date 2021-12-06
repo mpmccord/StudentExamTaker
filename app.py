@@ -1,12 +1,10 @@
-<<<<<<< HEAD
+
 import flask
 from flask import Flask, render_template, request
 import flask_login
 import os
-from login import *
-=======
+# from login import *
 from werkzeug.security import generate_password_hash
->>>>>>> d46189be77e12f55e974ca9ee75dc02e0c930b08
 
 from exam_backend import models
 from exam_backend.models import User
