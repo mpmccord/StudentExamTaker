@@ -1,38 +1,37 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, redirect, url_for, request
 #from Cryptography.StudentExamTaker.templates.login import RegistrationForm
-=======
+
 import flask
 from flask import Flask, render_template
 import flask_login
 import os
 from login import *
->>>>>>> 9dafebc32419fa97c0eb85fa1cfd7f1be81efa3e
+from werkzeug.security import generate_password_hash
 
-app = Flask(__name__)
-app.secret_key = os.urandom(81)
-login_manager = flask_login.LoginManager(app)
+from exam_backend import models
+from exam_backend.models import User
+from exam_backend.models import db
+from exam_backend import create_app
+from flask_migrate import Migrate
 
-# Temporary: for testing purposes only
-users = {'foo@bar.tld': {'password': 'secret'}}
+app = create_app()
+db.init_app(app)
+migrate = Migrate(app, db)
 
 
-@app.route("/")
-def main_page():
-    return render_template("index.html")
+@app.before_first_request
+def createDatabase():
+    db.create_all()
+    """
+    new_user = User(email="foo.bar@my_email.com", password=generate_password_hash("secret", method='sha256'), school = "University of South Florida", type_account = "Teacher")
 
+    # add the new user to the database
+    db.session.add(new_user)
+    db.session.commit()
+    """
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-<<<<<<< HEAD
-    error = None
-    if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('/teacher_home'))
-    return render_template('login.html', error=error)
-=======
     if flask.request.method == 'GET':
         return render_template("login.html")
     email = flask.request.form['email']
@@ -68,7 +67,6 @@ def login():
 
     return 'Bad login'
 """
->>>>>>> 9dafebc32419fa97c0eb85fa1cfd7f1be81efa3e
 
 
 @app.route("/signup", methods=['GET', 'POST'])
@@ -76,8 +74,6 @@ def signup():
     return render_template("signup.html")
 
 
-<<<<<<< HEAD
-=======
 @login_manager.user_loader
 def user_loader(email):
     if email not in users:
@@ -136,7 +132,6 @@ def protected():
 def unauthorized_handler():
     return 'Unauthorized'
 
->>>>>>> 9dafebc32419fa97c0eb85fa1cfd7f1be81efa3e
 
 if __name__ == "__main__":
-    app.run(port=5678)
+    app.run(port=5678, debug=True)
