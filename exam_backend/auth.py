@@ -33,32 +33,29 @@ def login_post():
     return redirect(url_for('main.profile'))
 
 
-@auth.route('/signup')
+@auth.route('/signup', methods=['GET', 'POST'])
 def signup():
-    return render_template('signup.html')
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        school = request.form.get('school')
+        type_account = request.form.get("type-account")
+        user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
 
+        if user: # if a user is found, we want to redirect back to signup page so user can try again
+            flash('Email address already exists')
+            return redirect(url_for('auth.signup'))
 
-@auth.route('/signup', methods=['POST'])
-def signup_post():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    school = request.form.get('school')
-    type_account = request.form.get('type-account')
-    user = User.query.filter_by(
-        email=email).first()  # if this returns a user, then the email already exists in database
+        # create new user with the form data. Hash the password so plaintext version isn't saved.
+        new_user = User(email=email, school = school, type_account = type_account, password=generate_password_hash(password, method='sha256'))
 
-    if user:  # if a user is found, we want to redirect back to signup page so user can try again
-        flash('Email address already exists')
-        return redirect(url_for('auth.signup'))
+        # add the new user to the database
+        db.session.add(new_user)
+        db.session.commit()
 
-    # create new user with the form data. Hash the password so plaintext version isn't saved.
-    new_user = User(email=email, password=generate_password_hash(password, method='sha256'), school = school, type_account=type_account)
-
-    # add the new user to the database
-    db.session.add(new_user)
-    db.session.commit()
-
-    return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.login'))
+    else:
+        return render_template("signup.html")
 
 
 @auth.route('/logout')

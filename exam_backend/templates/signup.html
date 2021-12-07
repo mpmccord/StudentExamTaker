@@ -11,7 +11,7 @@
 </div>
 <body>
 <h1>Student Exam Taker</h1>
-<div class = "box" id="signup-screen">
+<!-- <div class = "box" id="signup-screen">
     <form>
     <label for="email"><b>Email</b></label><br/>
     <input class="input is-large" type="text" id="email"/><br/>
@@ -26,7 +26,7 @@
     <input class="input is-large" type="text" id="school"/><br/>
     <input type="submit" value="Sign Up"/><br/>
     </form>
-</div>
+</div> -->
 {% with messages = get_flashed_messages() %}
 {% if messages %}
     <div class="notification is-danger">
@@ -34,8 +34,8 @@
     </div>
 {% endif %}
 {% endwith %}
-<!-- <div id="signup-screen">
-    <form>
+<div id="signup-screen">
+    <form action = "{{ url_for('auth.signup')}}" method = 'POST'>
     <label for="email"><b>Email</b></label><br/>
     <input type="email" id="email" name="email"/><br/>
         <label for="password"><b>Password</b></label><br/>
@@ -48,7 +48,7 @@
     <label for="school"><b>School</b></label><br/>
     <input type="text" id="school"/><br/>
     <input type="submit" value="Sign Up"/><br/>
-</form> -->
+</form>
 
 </body>
 </html>

@@ -14,6 +14,7 @@ def create_app():
     app.config['SECRET_KEY'] = os.urandom(256)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
