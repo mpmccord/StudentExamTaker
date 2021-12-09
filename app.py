@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request
 #from Cryptography.StudentExamTaker.templates.login import RegistrationForm
 
 import flask
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import flask_login
 import os
 from login import *
@@ -121,17 +121,27 @@ def request_loader(request):
     user.id = email
     return user
 
+from exam_backend import models
+from exam_backend.models import User
+from exam_backend.models import db
+from exam_backend import create_app
+from flask_migrate import Migrate
 
-@app.route('/protected')
-@flask_login.login_required
-def protected():
-    return 'Logged in as: ' + flask_login.current_user.id
+app = create_app()
+db.init_app(app)
+migrate = Migrate(app, db)
 
 
-@login_manager.unauthorized_handler
-def unauthorized_handler():
-    return 'Unauthorized'
+@app.before_first_request
+def createDatabase():
+    db.create_all()
+    """
+    new_user = User(email="foo.bar@my_email.com", password=generate_password_hash("secret", method='sha256'), school = "University of South Florida", type_account = "Teacher")
 
+    # add the new user to the database
+    db.session.add(new_user)
+    db.session.commit()
+    """
 
-if __name__ == "__main__":
-    app.run(port=5678, debug=True)
+if __name__ == '__main__':
+    app.run(port=5685, debug=True)

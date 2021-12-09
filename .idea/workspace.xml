@@ -42,6 +42,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -53,7 +54,7 @@
       <recent name="$PROJECT_DIR$/static/css" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.app">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Student-Exam-Taker" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -139,6 +140,7 @@
       <workItem from="1637182499142" duration="8580000" />
       <workItem from="1638053554063" duration="4069000" />
       <workItem from="1638231083472" duration="5091000" />
+      <workItem from="1638816865191" duration="3449000" />
     </task>
     <servers />
   </component>
