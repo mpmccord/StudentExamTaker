@@ -4,8 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
-from .models import User
-from .models import db
+from .models import User, db, Exam
 # init SQLAlchemy so we can use it later in our models
 app = Flask(__name__)
 
@@ -27,10 +26,10 @@ def create_app():
     # blueprint for auth routes in our exam_backend
     from .auth import auth as auth_blueprint
 
-    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(auth_blueprint, name="auth")
 
     # blueprint for non-auth parts of exam_backend
     from .main import main as main_blueprint
 
-    app.register_blueprint(main_blueprint)
+    app.register_blueprint(main_blueprint, name="main")
     return app
