@@ -5,7 +5,7 @@ import flask
 from flask import Flask, render_template, request
 import flask_login
 import os
-from login import *
+from exam_backend.login import *
 from werkzeug.security import generate_password_hash
 
 from exam_backend import models
