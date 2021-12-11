@@ -3,6 +3,7 @@ from . import app
 from flask_login import LoginManager
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, PasswordField, TextAreaField, validators
+from wtforms.validators import DataRequired
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -11,11 +12,12 @@ class RegistrationForm(FlaskForm):
     username = TextAreaField('Username', [validators.Length(min=4, max=20)])
     email = TextAreaField('Email Address', [validators.Length(min=6, max=50)])
     password = PasswordField('New Password', [
+        DataRequired(),
         # validators.Required(),
         validators.EqualTo('confirm', message='Passwords must match')
     ])
     confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)')#, [validators.Required()])
+    accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', DataRequired())#, [validators.Required()])
 
 @app.route('/register/', methods=["GET","POST"])
 def register_page():
