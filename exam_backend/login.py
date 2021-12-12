@@ -1,5 +1,6 @@
 from flask import request, Blueprint
 # from . import app
+from .models import db, User
 from flask_login import LoginManager
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, PasswordField, TextAreaField, validators, StringField
@@ -7,6 +8,7 @@ from wtforms.fields.choices import SelectField, RadioField
 from wtforms.validators import DataRequired, Email, Regexp, ValidationError
 login_stuff = Blueprint('login_stuff', __name__)
 from password_strength import PasswordPolicy, PasswordStats
+from werkzeug.security import check_password_hash
 # login_manager = LoginManager()
 # login_manager.init_app(login_stuff)
 
@@ -31,15 +33,15 @@ class RegistrationForm(FlaskForm):
     type_account = ["Teacher"]
     type_accounts = RadioField("Account", validators=[DataRequired()], choices = type_account)
     accept_tos = BooleanField('I accept the TOS', [DataRequired()])
-
+"""
+User login form.
+- Takes in the email, password and school and logs the user in.
+"""
 class LoginForm(FlaskForm):
     # username = TextAreaField('Username', [validators.Length(min=4, max=20)])
     email = TextAreaField('Email Address', [validators.Length(min=6, max=50), Email()])
     password = PasswordField('Password', [
-        DataRequired(),
-        validators.length(min=8),
-
-        validators.EqualTo('confirm', message='Passwords must match')
+        DataRequired()
     ])
     choices = ["New College of Florida", "University of South Florida", "Florida International University"]
     school = SelectField("School", [DataRequired()], choices=choices)
