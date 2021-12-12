@@ -29,22 +29,20 @@ class RegistrationForm(FlaskForm):
     schools = ["New College of Florida", "University of South Florida", "Florida International University"]
     school = SelectField("School", [DataRequired()], choices=schools)
     type_account = ["Teacher"]
-    # type_accounts = SelectField("Account", [DataRequired()], choices=type_accounts)
     type_accounts = RadioField("Account", validators=[DataRequired()], choices = type_account)
     accept_tos = BooleanField('I accept the TOS', [DataRequired()])
 
 class LoginForm(FlaskForm):
-    username = TextAreaField('Username', [validators.Length(min=4, max=20)])
-    email = TextAreaField('Email Address', [validators.Length(min=6, max=50)])
-    password = PasswordField('New Password', [
+    # username = TextAreaField('Username', [validators.Length(min=4, max=20)])
+    email = TextAreaField('Email Address', [validators.Length(min=6, max=50), Email()])
+    password = PasswordField('Password', [
         DataRequired(),
         validators.length(min=8),
 
         validators.EqualTo('confirm', message='Passwords must match')
     ])
     choices = ["New College of Florida", "University of South Florida", "Florida International University"]
-    school = SelectField("School", DataRequired(), choices=choices)
-    accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', DataRequired())#, [validators.Required()])
+    school = SelectField("School", [DataRequired()], choices=choices)
 
 @login_stuff.route('/register/', methods=["GET","POST"])
 def register_page():

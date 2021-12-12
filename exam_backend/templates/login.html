@@ -11,19 +11,47 @@
 </div>
 <body>
 <h1>Student Exam Taker</h1>
-<div class="container">
-    <h1>Please login</h1>
-    <br>
-    <form action="" method="post">
-      <input type="text" placeholder="Username" name="username" value="{{
-        request.form.username }}">
-       <input type="password" placeholder="Password" name="password" value="{{
-        request.form.password }}">
-      <input class="btn btn-default" type="submit" value="Login">
-    </form>
-    {% if error %}
-      <p class="error"><strong>Error:</strong> {{ error }}
-    {% endif %}
-  </div>
+<!--<div class = "box" id="signup-screen">
+    <form>
+    <label for="email"><b>Email</b></label><br/>
+    <input class="input is-large" type="text" id="email"/><br/>
+        <label for="password"><b>Password</b></label><br/>
+    <input class="input is-large" type="text" id="password"/><br/>
+    <label for="password">Passwords must be at least 10 characters, include both uppercase and lowercase letters, at least one special character, and at least one number.</label><br/>
+        <label for="confirm-password"><b>Confirm Password</b></label><br/>
+    <input class="input is-large" type="text" id="confirm-password"/><br/>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+    </div>
+{% endif %}
+{% endwith %}
+<div id="signup-screen">
+    <form>
+    <label for="email"><b>Email</b></label><br/>
+    <input type="email" id="email" name="email"/><br/>
+        <label for="password"><b>Password</b></label><br/>
+    <input type='password' name='password' id='password' placeholder='password'/><br/>
+    <label for="password" type="password">Passwords must be at least 10 characters, include both uppercase and lowercase letters, at least one special character, and at least one number.</label><br/>
+        <label for="confirm-password"><b>Confirm Password</b></label><br/>
+    <input type='password' name='confirm-password' id='confirm-password' placeholder='password'/><br/>
+        <label><b>Type of Account</b></label><br/>
+        <input type="radio" name="type-account" value = "teacher"/>Teacher<br/>
+    <label for="school"><b>School</b></label><br/>
+    <input type="text" id="school"/><br/>
+    <input type="submit" value="Sign Up"/><br/>
+</form>
+</div>
 </body>
 </html>
+-->
+{% from "_form_helper.html" import render_field %}
+<form method=post>
+  <dl>
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.school) }}
+  </dl>
+  <p><input type=submit value=Login>
+</form>
