@@ -19,7 +19,7 @@ class RegistrationForm(FlaskForm):
     username = StringField('Username', [validators.Length(min=4, max=25)])
     email = StringField('Email Address', [validators.Length(min=6, max=35), Email("Please enter a valid email")])
     password = PasswordField('New Password', [
-        # User must enter a digit
+        # Must be at least eight characters, at least one uppercase letter, one lowercase letter, one number and one special character
         validators.Regexp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", message="Must be at least eight characters, at least one uppercase letter, one lowercase letter, one number and one special character")
 
 
