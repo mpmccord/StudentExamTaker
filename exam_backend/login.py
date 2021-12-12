@@ -11,9 +11,10 @@ from password_strength import PasswordPolicy, PasswordStats
 # login_manager.init_app(login_stuff)
 
 """
-Validator for passwords: checks if there is punctuation in the string
-@param my_str: a string
-@return: boolean: whether the string has punctuation.
+User registration form.
+- Takes in the username, email, password, school, account type
+- Confirms the password is strong enough by using these criteria.
+In future, the functions in testing password will be used rather than regexp to incorporate entropy as well.
 """
 class RegistrationForm(FlaskForm):
     username = StringField('Username', [validators.Length(min=4, max=25)])
