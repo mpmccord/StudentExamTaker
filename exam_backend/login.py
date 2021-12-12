@@ -4,25 +4,12 @@ from flask_login import LoginManager
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, PasswordField, TextAreaField, validators, StringField
 from wtforms.fields.choices import SelectField, RadioField
-from wtforms.validators import DataRequired, Email, Regexp
+from wtforms.validators import DataRequired, Email, Regexp, ValidationError
 login_stuff = Blueprint('login_stuff', __name__)
-import string
-import re
+from password_strength import PasswordPolicy, PasswordStats
 # login_manager = LoginManager()
 # login_manager.init_app(login_stuff)
 
-"""
-class RegistrationForm(FlaskForm):
-    username = TextAreaField('Username', [validators.Length(min=4, max=20)])
-    email = TextAreaField('Email Address', [validators.Length(min=6, max=50)])
-    password = PasswordField('New Password', [
-        DataRequired(),
-        # validators.Required(),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)', DataRequired())#, [validators.Required()])
-"""
 """
 Validator for passwords: checks if there is punctuation in the string
 @param my_str: a string
@@ -32,11 +19,10 @@ class RegistrationForm(FlaskForm):
     username = StringField('Username', [validators.Length(min=4, max=25)])
     email = StringField('Email Address', [validators.Length(min=6, max=35), Email("Please enter a valid email")])
     password = PasswordField('New Password', [
-        validators.length(min=8, message = "Password must be at least 8 characters"),
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords must match'),
-        Regexp(regex="[0-9]", message="Must have at least one digit"),
-        Regexp(regex="\w+", message="Must have at least one special character")
+        # User must enter a digit
+        validators.Regexp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", message="Must be at least eight characters, at least one uppercase letter, one lowercase letter, one number and one special character")
+
+
     ])
     confirm = PasswordField('Repeat Password')
     schools = ["New College of Florida", "University of South Florida", "Florida International University"]
