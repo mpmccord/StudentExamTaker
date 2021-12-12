@@ -11,8 +11,7 @@
 </div>
 <body>
 <h1>Student Exam Taker</h1>
-<<<<<<< HEAD:templates/signup.html
-<div class = "box" id="signup-screen">
+<!--<div class = "box" id="signup-screen">
     <form>
     <label for="email"><b>Email</b></label><br/>
     <input class="input is-large" type="text" id="email"/><br/>
@@ -21,7 +20,6 @@
     <label for="password">Passwords must be at least 10 characters, include both uppercase and lowercase letters, at least one special character, and at least one number.</label><br/>
         <label for="confirm-password"><b>Confirm Password</b></label><br/>
     <input class="input is-large" type="text" id="confirm-password"/><br/>
-=======
 {% with messages = get_flashed_messages() %}
 {% if messages %}
     <div class="notification is-danger">
@@ -38,7 +36,6 @@
     <label for="password" type="password">Passwords must be at least 10 characters, include both uppercase and lowercase letters, at least one special character, and at least one number.</label><br/>
         <label for="confirm-password"><b>Confirm Password</b></label><br/>
     <input type='password' name='confirm-password' id='confirm-password' placeholder='password'/><br/>
->>>>>>> d46189be77e12f55e974ca9ee75dc02e0c930b08:exam_backend/templates/signup.html
         <label><b>Type of Account</b></label><br/>
         <input type="radio" name="type-account" value = "teacher"/>Teacher<br/>
     <label for="school"><b>School</b></label><br/>
@@ -48,4 +45,16 @@
 </div>
 </body>
 </html>
-
+-->
+{% from "_form_helper.html" import render_field %}
+<form method=post>
+  <dl>
+    {{ render_field(form.username) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm) }}
+    {{ render_field(form.school) }}
+    {{ render_field(form.type_accounts) }}
+  </dl>
+  <p><input type=submit value=Register>
+</form>

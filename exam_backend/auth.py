@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import User
 from .models import db
-
+from .login import RegistrationForm
 auth = Blueprint('auth', __name__)
 
 
@@ -35,7 +35,17 @@ def login_post():
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if request.method == 'POST':
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User(username=form.username.data, email=form.email.data,
+                    password=generate_password_hash(form.password.data, "sha256"), 
+                    school=form.school.data, type_account = form.type_account.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Thanks for registering')
+        return redirect(url_for('login'))
+    return render_template('signup.html', form=form)
+    """if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         school = request.form.get('school')
@@ -55,7 +65,7 @@ def signup():
 
         return redirect(url_for('auth.login'))
     else:
-        return render_template("signup.html")
+        return render_template("signup.html")"""
 
 
 @auth.route('/logout')
