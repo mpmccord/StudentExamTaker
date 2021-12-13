@@ -24,9 +24,7 @@
 {% from "_form_helper.html" import render_field %}
 <form method=post>
   <dl>
-    {{ render_field(form.email) }}
-    {{ render_field(form.password) }}
-    {{ render_field(form.school) }}
+    {{ render_field(form.name) }}
+    {{ render_field(form.submit)}}
   </dl>
-  <p><input type=submit value=Login>
 </form>

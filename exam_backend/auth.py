@@ -1,6 +1,6 @@
 # auth.py
 
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import User, Course
@@ -49,14 +49,11 @@ def signup():
             return redirect(url_for('auth.signup'))
 
         # create new user with the form data. Hash the password so plaintext version isn't saved.
-        course = Course(name="Homeroom", teacher=-1, school = school)
-        new_user = User(email=email, school = school, courses=[-1], type_account = type_account, password=generate_password_hash(password, method='sha256'))
-        course.teacher = new_user.id
-        new_user.courses = [course.id]
+        new_user = User(email=email, school = school, type_account = type_account, password=generate_password_hash(password, method='sha256'))
+        # new_user.courses = [course.id]
 
         # add the new user to the database
         db.session.add(new_user)
-        db.session.add(course)
         db.session.commit()
 
         return redirect(url_for('auth.login'))

@@ -17,7 +17,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     school = db.Column(db.Text)
-    courses = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=True, default=None)
+    courses = db.relationship("Course", backref="course_teacher", lazy = True)
     type_account = db.Column(db.Text)
 
 """
@@ -32,5 +32,5 @@ Course corresponding to one teacher where the user is able to create exams.
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
     name = db.Column(db.String, unique = True)
-    teacher = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    teacher = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     school = db.Column(db.String)

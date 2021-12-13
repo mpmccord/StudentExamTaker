@@ -4,7 +4,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
-from .login import login_stuff
 from .models import User, db, Course
 # init SQLAlchemy so we can use it later in our models
 app = Flask(__name__)
@@ -33,6 +32,6 @@ def create_app():
     from .main import main as main_blueprint
 
     app.register_blueprint(main_blueprint, name="main")
-
-    app.register_blueprint(login_stuff, name="login_stuff")
+    from .dashboard import dashboard
+    app.register_blueprint(dashboard, name="dashboard")
     return app
