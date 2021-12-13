@@ -5,12 +5,7 @@ from flask_login import LoginManager
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, PasswordField, TextAreaField, validators, StringField
 from wtforms.fields.choices import SelectField, RadioField
-from wtforms.validators import DataRequired, Email, Regexp, ValidationError
-login_stuff = Blueprint('login_stuff', __name__)
-from password_strength import PasswordPolicy, PasswordStats
-from werkzeug.security import check_password_hash
-# login_manager = LoginManager()
-# login_manager.init_app(login_stuff)
+from wtforms.validators import DataRequired, Email
 
 """
 User registration form.
@@ -45,17 +40,3 @@ class LoginForm(FlaskForm):
     ])
     choices = ["New College of Florida", "University of South Florida", "Florida International University"]
     school = SelectField("School", [DataRequired()], choices=choices)
-
-@login_stuff.route('/register/', methods=["GET","POST"])
-def register_page():
-    try:
-        form = RegistrationForm(request.form)
-        if request.method == "POST" and form.validate():
-            username = form.username.data
-            email = form.email.data
-
-
-
-    except Exception as e:
-        return(str(e))
-

@@ -17,6 +17,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     school = db.Column(db.Text)
+    courses = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=True, default=None)
     type_account = db.Column(db.Text)
 
 """
@@ -31,32 +32,5 @@ Course corresponding to one teacher where the user is able to create exams.
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
     name = db.Column(db.String, unique = True)
-    teacher = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    teacher = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     school = db.Column(db.String)
-    questions = db.relationship("User", backref="teacher", lazy = True)
-    # exams = db.relationship("Exam", backref="course", lazy = True)
-
-"""
-Exams corresponding the course, with specific questions.
-@param id: the unique id corresponding to the exam.
-@param course: the unique id corresponding to the key (course)
-@param questions: the questions on the exam.
-"""
-"""
-class Exam(db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
-    course = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
-    teacher = db.Column(db.Integer)
-    questions = db.relationship("Question", backref="exam", lazy = True)
-"""
-"""
-Questions for each of the exams.
-@param id: the unique id corresponding to this particular question.
-@param exam_id: the unique id corresponding to the exam.
-@param question_text: the question (ex. What is the probability of getting 2 heads?)
-"""
-"""
-class Question(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    exam_id = db.Column(db.Integer, db.ForeignKey('exam.id'), nullable=False)
-    question_text = db.Column(db.String)"""

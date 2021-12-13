@@ -1,3 +1,7 @@
+"""
+This file contains methods to check a password by enforcing the amount of entropy and the scores.
+Future work will involve replacing the regexp in the actual file with something along these lines.
+"""
 from wtforms.validators import ValidationError
 from password_strength import PasswordPolicy, PasswordStats
 class EnforcingStrongPasswords():
