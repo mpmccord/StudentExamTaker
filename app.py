@@ -15,6 +15,8 @@ db.create_all()
 migrate = Migrate(app, db)
 users = User.query.all()
 print("Users", users, file = sys.stderr)
+for user in users:
+    print("User", user.email, user.courses)
 @app.before_first_request
 def createDatabase():
     db.create_all()

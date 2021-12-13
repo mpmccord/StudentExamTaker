@@ -1,17 +1,28 @@
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for
 from flask_login import login_required
 from .models import db, Course
+from .classes_forms import CreateNewClassForm
 dashboard = Blueprint("dashboard", __name__)
 
 @dashboard.route('/dashboard')
 @login_required
 def view_dashboard():
-    return render_template("user-dashboard")
+    return render_template("user-dashboard.html")
 
-@dashboard.route("/add_course")
+@dashboard.route('/create', methods=["GET", "POST"])
 @login_required
 def add_new_course():
-    name = request.form.get("name")
-    course = Course(name=name, teacher = g.user, school = g.school)
-    db.add(course)
-    db.commit()
+    form = CreateNewClassForm()
+    if request.method == 'POST':
+        course_name = request.form.get("name")
+        course = Course(name=course_name, teacher=g.user)
+        
+        # new_user.courses = [course.id]
+
+        # add the new course to the database
+        db.session.add(course)
+        db.session.commit()
+
+        return redirect(url_for('main.profile'))
+    else:
+        return render_template("adding_new_courses.html", form=form)

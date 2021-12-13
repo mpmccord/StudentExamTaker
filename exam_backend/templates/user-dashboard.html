@@ -10,22 +10,10 @@
   <a href="{{ url_for('auth.login') }}">Log in</a>
  <a href="{{ url_for('auth.signup') }}">Sign Up</a>
 </div>
-<div class="vertical-menu">
-    <a href="#" class="active">Home</a>
-    <a href="#">Class 1</a>
-    <a href="#">Class 2</a>
-    <a href="#">Class 3</a>
-    <a href="#">Class 4</a>
-  </div>
-<!-- Use any element to open the sidenav -->
-<span onclick="openNav()">open</span>
-
-<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-<div id="main">
-
 </div>
 <body>
 <h1>Student Exam Taker</h1>
 <p>Welcome {{ email }}</p>
+<p><a href="{{ url_for('main.add_new_course') }}">Create New Class</a></p>
 </body>
 </html>

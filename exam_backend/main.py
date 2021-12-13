@@ -1,8 +1,9 @@
 # main.py
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, request, url_for, g
 from flask_login import login_required, current_user
-
+from .classes_forms import CreateNewClassForm
+from .models import db, Course
 main = Blueprint('main', __name__)
 
 
@@ -15,4 +16,22 @@ def index():
 @login_required
 def profile():
     email = current_user.email
-    return render_template('user-dashboard.html', email=email)
+    return render_template('user-dashboard.html', email=email) #courses=current_user.courses)
+
+@main.route('/create', methods=["GET", "POST"])
+@login_required
+def add_new_course():
+    form = CreateNewClassForm()
+    if request.method == 'POST':
+        course_name = request.form.get("name")
+        course = Course(name=course_name, teacher=current_user.id)
+        
+        # new_user.courses = [course.id]
+
+        # add the new course to the database
+        db.session.add(course)
+        db.session.commit()
+
+        return redirect(url_for('main.profile'))
+    else:
+        return render_template("adding_new_courses.html", form=form)

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Exam Taker - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+ <div class="topnav">
+  <a href="{{ url_for('auth.login') }}">Log in</a>
+ <a href="{{ url_for('auth.signup') }}">Sign Up</a>
+</div>
+<body>
+<h1>Student Exam Taker</h1>
+<p>Welcome {{ name }}</p>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+{% from "_form_helper.html" import render_field %}
+<form method=post>
+  <dl>
+    {{ render_field(form.name) }}
+  </dl>
+  <p><input type=submit value="Add Course">
+</form>
