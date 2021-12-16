@@ -2,8 +2,8 @@
 
 from flask import Blueprint, render_template, redirect, request, url_for, g
 from flask_login import login_required, current_user
-from .classes_forms import CreateNewClassForm
-from .models import db, Course
+from .classes_forms import CreateNewClassForm, CreateNewExamForm
+from .models import db, Course, Exam
 main = Blueprint('main', __name__)
 
 
@@ -16,7 +16,8 @@ def index():
 @login_required
 def profile():
     email = current_user.email
-    return render_template('user-dashboard.html', email=email) #courses=current_user.courses)
+    courses = current_user.courses
+    return render_template('user-dashboard.html', email=email, courses=courses) #courses=current_user.courses)
 
 @main.route('/create', methods=["GET", "POST"])
 @login_required
@@ -32,6 +33,14 @@ def add_new_course():
         db.session.add(course)
         db.session.commit()
 
-        return redirect(url_for('main.profile'))
+        return redirect(url_for('main.profile', courses=current_user.courses))
     else:
         return render_template("adding_new_courses.html", form=form)
+
+@main.route("/create-exam/<int:course_id>", methods = ['POST', 'GET'])
+def createExam(course_id):
+    form = CreateNewExamForm()
+    if request.method == 'POST':
+        exam_name = request.form.get("name")
+        my_exam = Exam()
+    return render_template("adding_new_courses.html", form = form)

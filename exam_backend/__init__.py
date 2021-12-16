@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
 from .classes_forms import CreateNewClassForm
-from .models import User, db, Course
+from .models import User, db, Course, Exam
 # init SQLAlchemy so we can use it later in our models
 app = Flask(__name__)
 
