@@ -50,13 +50,21 @@ def view_course(course_id):
 def createExam(course_id):
     form = CreateNewExamForm()
     if request.method == 'POST':
+        if not Course.query.get(course_id) or Course.query.get(course_id).teacher != current_user.id:
+            flash("Invalid user")
+            return redirect(url_for("main.profile"))
         exam_name = request.form.get("name")
-        my_exam = Exam()
-    return render_template("adding_new_courses.html", form = form)
+        my_exam = Exam(name=exam_name, course_class=course_id, school=current_user.school)
+        db.session.add(my_exam)
+        db.session.commit()
+        return redirect(url_for("main.view_course", course_id=course_id))
+    return render_template("create_new_exam.html", form = form, course_name = Course.query.get(course_id).name)
 
-
-def get_exam(post_id):
-    exam = Exam.query.filter_by(teacher=current_user.id, id=post_id).first()
-    if not exam:
+@main.route("/profile/view_exam/<int:exam_id>")
+@login_required
+def get_exam(exam_id):
+    exam = Exam.query.get(exam_id)
+    if not exam or Course.query.get(exam.course_class).teacher != current_user.id:
         flash("Invalid exam")
         return redirect(url_for("main.profile"))
+    return render_template("view_exam.html", selected_course = Course.query.get(exam.course_class), courses=current_user.courses, selected_exam=exam)

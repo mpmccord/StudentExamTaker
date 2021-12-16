@@ -14,22 +14,25 @@
 </div>
 <body>
 <h1>Student Exam Taker</h1>
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-{% block body %}{% endblock %}
 <p>Welcome {{ email }}</p>
+
 <div class="vertical-menu">
   <a href="#" class="active"><a href="{{ url_for('main.add_new_course') }}">Create New Class</a></a>
-  {%for course in courses%}
+  {%for exam in selected_course.exams%}
   
-    <a href="{{ url_for('main.view_course', course_id = course.id) }}"> {{course.name}} </a>
+    <a href="{{url_for('main.view_course', course_id=selected_course.id)}}"> {{exam.name}} </a>
+{%endfor%}
+</div>
+<div class="vertical-menu">
+  <a href="#" class="active"><a href="{{ url_for('main.createExam', course_id=selected_course.id) }}">Create New Exam for {{ selected_course.name}}</a></a>
+  {%for exam in selected_course.exams%}
+  
+  <a href="{{url_for('main.get_exam', course_id=selected_course.id, exam_id=exam.id)}}"> {{exam.name}} </a>
+{%endfor%}
+{{ selected_course.name}}
+{{selected_exam.name}}
+{%for question in selected_exam.questions%}
+{{question}}
 {%endfor%}
 </div>
 </body>
