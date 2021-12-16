@@ -19,11 +19,9 @@
   <a href="#" class="active"><a href="{{ url_for('main.add_new_course') }}">Create New Class</a></a>
   {%for course in courses%}
   
-    {{course.name}}
+    <a href="{{url_for('main.view_course', course_id=course.id)}}"> {{course.name}} </a>
 {%endfor%}
-{{ current_course.name }}
-{{ current_course.school }}
-
+{{ selected_course.name}}
 </div>
 </body>
 </html>

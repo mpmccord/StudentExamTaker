@@ -34,7 +34,6 @@ class Course(db.Model):
     name = db.Column(db.String, unique = True)
     teacher = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     school = db.Column(db.String)
-    exams = db.relationship("Exam", backref="course_for_exam")
 
 class Exam(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
