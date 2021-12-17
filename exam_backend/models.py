@@ -47,3 +47,4 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text_question = db.Column(db.String)
     given_exam = db.Column(db.Integer, db.ForeignKey('exam.id'), nullable=False)
+    # answers = db.Column(MutableList.as_mutable(ARRAY(db.String)))

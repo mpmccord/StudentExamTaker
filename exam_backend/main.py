@@ -2,8 +2,8 @@
 
 from flask import Blueprint, render_template, redirect, request, url_for, g, flash
 from flask_login import login_required, current_user
-from .classes_forms import CreateNewClassForm, CreateNewExamForm
-from .models import db, Course, Exam
+from .classes_forms import CreateNewClassForm, CreateNewExamForm, AddQuestionForm
+from .models import db, Course, Exam, Question
 main = Blueprint('main', __name__)
 
 
@@ -68,3 +68,36 @@ def get_exam(exam_id):
         flash("Invalid exam")
         return redirect(url_for("main.profile"))
     return render_template("view_exam.html", selected_course = Course.query.get(exam.course_class), courses=current_user.courses, selected_exam=exam)
+
+@main.route("/profile/update_exam", methods = ["GET", "POST"])
+@login_required
+def setQuestions(exam_id):
+    exam = Exam.query.get(exam_id)
+    if not exam or Course.query.get(exam.course_class).teacher != current_user.id:
+        flash("Unauthorized resource")
+        return redirect(url_for("main.profile"))
+    form = AddQuestionForm()
+    if request.method == "POST":
+        text = request.form.get("text")
+        # The three possible answers that the user can choose.
+        a = request.form.get("a")
+        b = request.form.get("b")
+        c = request.form.get("c")
+        # Possible correct answers
+        choices = ["a", "b", "c"]
+        correct_answer = request.form.get("c")
+
+@main.route("/test", methods=("GET", "POST"))
+def test():
+    form = AddQuestionForm()
+    if request.method == "POST":
+        text = request.form.get("text")
+        # answer_response = request.form.get("possible_answers")
+        print(text)
+        quest = Question(text_question = text, answers = ["None"], given_exam=1)
+        print(text)
+        db.session.add(quest)
+        db.session.commit()
+        flash("You have successfully added a question!")
+        return redirect(url_for("main.index"))
+    return render_template("add_new_question.html", form=form)
